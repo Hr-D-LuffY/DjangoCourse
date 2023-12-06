@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static%}
+{% block title %}About us{% endblock title %}
+{%block clink%} 
+<link rel="stylesheet" href="{% static 'index.css' %} ">
+{%endblock%}
+{% block content %}
+<div class="responsive-container-block bigContainer p-4 mx-auto">
+    <div class="responsive-container-block Container p-4 mx-auto my-3">
+      <img class="mainImg" src="{% static 'images/res.jpg' %}">
+      <div class="allText p-0 m-0 mx-3 aboveText">
+        <p class="text-blk m-0 p-3 fw-semibold fs-2 headingText">
+          Who are we?
+        </p>
+        <p class="text-blk  m-0 p-3 fw-semibold fs-3 headingText">
+          We are Phitron Chinese Restaurent
+        </p>
+        <p class="text-blk m-0 p-3 description">
+          Our goal is to satisfied our customer by good healthy food. here we can ensure you nice healthy food.
+        </p>
+        <p class="text-blk m-0 p-3 description">
+            And this site is made by one of Phitron cse fundamental course's student.
+        </p>
+      </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{%block title%} Home {%endblock%}
+{%block clink%} 
+<link rel="stylesheet" href="{% static "style.css" %}">
+{%endblock%}
+
+{%block content%}
+<div class="container row p-5 m-auto">
+    <div class="text_container  my-auto col-6">
+        <h2>Welcome to Phitron Chinese Restaurant</h2>
+        <h6>Enjoy your meals...</h6>
+    </div>
+    <div class="img_container col-6">
+        <img class='img rounded' src="{% static 'images/res.jpg' %}" alt="restaurant pic">
+    </div>
+</div>
+{%endblock%}

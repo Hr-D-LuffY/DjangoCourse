@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%block title%} Items {%endblock%}
+{%block content%}
+<div class=" container m-auto row gap-2 mt-4">
+    {%for i in data%}
+    <div class="card col-4" style="width: 18rem;">
+        <img src="{{i.strCategoryThumb}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">{{i.idCategory}}</p>
+            <h2 class="card-title">{{i.strCategory}}</h2>
+            <p class="card-text">{{i.strCategoryDescription | truncatewords:10}}</p>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{%endblock%}
