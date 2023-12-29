@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap px-5 p-3 align-items-center bg-white">
+
+    <div class="col-6">
+        <h1>Welcome to CarEveryWhere</h1>
+        <p>A place where you can find any car, any model and we are sure that you will like all of them!!!</p>
+    </div>
+  <div class="col-6">
+    <img src="{% static 'header.jpg' %}" style="width: 400px;height: 400px;" />
+  </div>
+</div>
+
+
+
+<div class="d-flex flex-wrap p-3 justify-content-around">
+    <div class="form-check">
+      <a class="btn btn-warning"  href="{% url 'homepage' %}">All</a>
+      </div>
+      {% for br in brand %}
+        <div class="form-check">
+          <a class="btn btn-warning " href="{% url 'brandwise' br.name%}">{{br.name}}</a>
+          
+        </div>
+      {% endfor %}
+
+</div>
+
+<h3 class="text-dark fw-bold">Total Car Found: {{cars | length}} </h3>
+<div class="d-flex flex-wrap justify-content-center">
+    {% for car in cars %}
+    <div class="col-4 mb-3 mb-sm-0 justify-content-center">
+        <div class="card mb-3" style="width: 25rem;">
+            <img src="{{car.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+              <h3 class="card-title">{{car.car_model}}</h3>
+              <h6 class="fw-normal">Price: ${{car.price}}</h6>
+              <h5 class="fw-normal">Brand: {{car.brand.name}}</h5>
+              <a href="{% url 'carDetails' car.id %}" class="btn btn-secondary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
