@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="m-3 text-center">
+  <h1 class="display-3">Welcome to HR Library</h1>
+  <p>A place where you can find any books and enjoy to read them all!!</p>
+</div>
+
+
+<div class="d-flex flex-wrap p-3 justify-content-around">
+    <div class="form-check">
+      <a class="btn btn-warning"  href="{% url 'homepage' %}">All</a>
+      </div>
+      {% for br in categories %}
+        <div class="form-check">
+          <a class="btn btn-warning " href="{% url 'categorywise' br.name%}">{{br.name}}</a>
+          
+        </div>
+      {% endfor %}
+
+</div>
+
+<h3 class="text-dark fw-bold">Total Books Found: {{books | length}} </h3>
+<div class="d-flex flex-wrap justify-content-center mb-5">
+    {% for book in books %}
+    <div class="col-4 mb-3 mb-sm-0 justify-content-center" >
+        <div class="card mb-5" style="width: 25rem;">
+            <img src="{{book.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+              <h3 class="card-title">{{book.title}}</h3>
+              <h6 class="fw-normal">Borrowing Price: ${{book.borrowing_price}}</h6>
+              <a href="{% url 'bookDetails' book.id %}" class="btn btn-secondary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

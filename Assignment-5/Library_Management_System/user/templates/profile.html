@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- component -->
+<div class="h-screen w-full bg-gray-50 flex justify-center items-center">
+    <div class="h-56 w-72 absolute flex justify-center items-center">
+      
+    </div>
+
+    <div
+      class="
+        h-56
+        mx-4
+        w-5/6
+        bg-blue-400
+        rounded-3xl
+        shadow-md
+        sm:w-80 sm:mx-0
+      "
+    >
+      <div class="h-1/2 w-full flex justify-between items-baseline  px-3 py-5">
+        <h1 class="text-white text-center">Profile</h1>
+        
+      </div>
+
+      <div
+        class="
+          bg-white
+          h-1/2
+          w-full
+          rounded-3xl
+          flex flex-col
+          justify-around
+          items-center
+        "
+      >
+        <div class="w-full h-1/2 flex justify-between items-center px-3 pt-2">
+          <div class="flex flex-col justify-center items-center">
+            <h1 class="text-gray-500 text-xs">Borrowing Books</h1>
+            <h1 class="text-gray-600 text-sm">{{lists|length}}</h1>
+          </div>
+          <div class="flex flex-col justify-center items-center">
+            <h1 class="text-gray-500 text-xs">Amount</h1>
+            <h1 class="text-gray-600 text-sm">${{acc.amount}}</h1>
+          </div>
+        </div>
+        <div class="w-full h-1/2  flex flex-col justify-center items-center">
+          <h1 class="text-gray-700 font-bold">{{acc.user.username|upper}}</h1>
+          <h1 class="text-gray-500 text-sm">{{acc.user.email}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+<h1 class="text-center mt-5 m-3">Borrowing History Report</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Book Name</th>
+        <th scope="col">Borrowing Time</th>
+        <th scope="col">Book Price</th>        
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for list in lists%}
+            <tr>
+                <td>{{list.books.title}}</td>
+                <td>{{list.borrowed_on}}</td>
+                <td>{{list.books.borrowing_price}}</td>
+                <td><a href="{% url "returnBook" list.books.id %}" class=" btn btn-warning btn-sm">Return Back</a></td>
+                </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+{% endblock content %}

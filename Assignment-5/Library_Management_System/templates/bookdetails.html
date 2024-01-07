@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap px-5 p-3 align-items-center bg-white m-6">
+
+    <div class="col-8">
+        <img src="{{book.image.url}}" style="width: 85%; height: 700px;" />
+    </div>
+
+    <div class="col-4">
+        <h2 class="display-3 fw-bold">{{book.title}}</h2><br>
+        <h6 class="fw-normal ">Borrowing Price: ${{book.borrowing_price}}</h6>
+        <h5 >Description: </h5>
+        <p> {{book.description}}</p>
+
+        {% if request.user.is_authenticated%}
+        <a href="{%url 'borrowBook' book.id%}" class="btn btn-primary">Borrow The Book Now</a>
+        {%endif%}
+    </div>
+  
+</div>
+
+<div>
+    <div class="card m-2">
+        <h2 class="p-3">Total Reviews : {{Reviews | length}}</h2>
+        {% for review in Reviews %}
+      <div class="card-body border m-2">
+            <p><b>{{review.name}}</b> {{review.created_on}}</p>
+            <p>{{review.body}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {%if match%}
+    <div class="">
+        <div></div>
+        <div class="py-2 px-3 rounded-xl bg-white mt-12">
+            <h1 class="font-bold text-3xl text-center pb-5 shadow-md">Add Reviews</h1>
+            <div class="w-full mt-10">
+                <form method="post" class="shadow-md border border-gray-200 rounded px-8 pt-6 pb-8 mb-4">
+                    {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %} 
+                    <div class="mb-4">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.name.id_for_label }}">
+                            {{ form.name.label }}
+                        </label> {{ form.name }} 
+                        {% if form.name.errors %} {% for error in form.name.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                        {% endfor %} {% endif %}</div>
+                    <div class="mb-4">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.password.id_for_label }}">
+                            {{ form.body.label }}
+                        </label> {{ form.body }} 
+                    </div>
+                    {% if field.errors %} {% for error in field.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %} {% endif %} 
+    
+                    <div class="flex items-center justify-center w-full">
+                        <button class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {%else%}{%endif%}
+</div>
+
+
+{% endblock content %}
